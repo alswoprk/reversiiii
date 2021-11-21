@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <iostream>
+#include <string>
 
 
 QT_BEGIN_NAMESPACE
@@ -12,9 +14,11 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 
 private slots:
 
@@ -34,6 +38,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    bool check_in_slot(int row_idx, int column_idx); //check whether value is in slot
+    int button_slots[8][8];
+
 
 };
 #endif // MAINWINDOW_H

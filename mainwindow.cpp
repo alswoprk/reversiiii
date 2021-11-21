@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+
 int turn=0; //global variable to call on
+
+using namespace std;
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -12,16 +15,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     //ui->stackedWidget->
 
-    QPushButton *button_slots[8][8]; //creating slot names as array; define in header
+    QPushButton *button_slots_connect[8][8]; //creating slot names as array; define in header
     for(int i=0; i<8; ++i){
         for(int j=0; j<8; ++j){
             QString butName="button"+QString::number(i)+QString::number(j);
-            button_slots[i][j]=MainWindow::findChild<QPushButton *>(butName);
-            connect(button_slots[i][j], SIGNAL(released()), this, SLOT(button_slots_pressed())); //connecting buttons
+            button_slots_connect[i][j]=MainWindow::findChild<QPushButton *>(butName);
+            connect(button_slots_connect[i][j], SIGNAL(released()), this, SLOT(button_slots_pressed())); //connecting buttons
         }
     }
 
-} //changing a little bit
+}
 
 MainWindow::~MainWindow()
 {
@@ -37,9 +40,18 @@ void MainWindow::on_start_button_clicked()
 }
 
 //
+
+bool MainWindow::check_in_slot(int row_idx, int column_idx){
+    if (button_slots[row_idx][column_idx]!=NULL)
+        return true;
+    else
+        return false;
+}
+
 void MainWindow::button_slots_pressed(){
 
     QPushButton *button = (QPushButton *)sender();
+    QString button_name=button->objectName();
 
     //CHANGE IMAGE DIRECTORY HERE!
     QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
@@ -47,10 +59,26 @@ void MainWindow::button_slots_pressed(){
     QIcon icon1(player1_icon);
     QIcon icon2(player2_icon);
 
-    //check whether button has icon already with if
+    int row_idx; //find rows and columns of button
+    int column_idx;
 
-    //setting label without qt designer and only comes out for warning signs
-    //set label for only couple seconds or terminate when clicked on
+    QString just_row_idx=button_name[-2]; //take just numbers of the value
+    QString just_column_idx=button_name[-1];
+
+    row_idx=just_row_idx.toInt(); //convert values to int
+    column_idx=just_column_idx.toInt();
+
+
+    if(check_in_slot(row_idx, column_idx)){ //check whether button has been placed with something already
+        //set error message
+
+
+        //setting label without qt designer and only comes out for warning signs
+        //set label for only couple seconds or terminate when clicked on
+    }
+    else{
+
+
 
     if(turn%2==0){ //changing turns
         button->setIcon(icon1);
@@ -60,6 +88,10 @@ void MainWindow::button_slots_pressed(){
 
         ui->player_status->setPixmap(player2);
         ui->player_status->show();
+
+        button_slots[row_idx][column_idx]=1;
+
+
 
         //send value of icon; find way to figure out which button was pressed
     }
@@ -71,13 +103,16 @@ void MainWindow::button_slots_pressed(){
 
         ui->player_status->setPixmap(player1);
         ui->player_status->show();
+
+        button_slots[row_idx][column_idx]=2;
     }
 
 
 
-    turn+=1;
+    turn+=1; //changing turns
 
     //button->setIcon(icon1);
+    }
 
 }
 //
