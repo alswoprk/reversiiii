@@ -38,10 +38,15 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    void initialize_board(); //starting board
     bool check_in_slot(int row_idx, int column_idx); //check whether value is in slot
     void update_board(int row_idx, int column_idx); //updating board after piece is put down
     bool check_adjacency(int row_idx, int column_idx); //check whether piece can be put down
-    int button_slots[8][8];
+    void change_pieces(int start_idx, int end_idx, int current_player, int direction, int row_idx, int column_idx); //change value of pieces
+    void update_board_icons(); //change icons of pieces
+    void update_board_score(); //count score
+    void end_the_game(int player1_score, int player2_score); //ending the game when board is full
+    int button_slots[8][8]={0}; //initialize to zero
 
 
 };

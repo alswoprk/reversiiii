@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-//int button_slots[8][8]; //keep track of values
-
 int turn=0; //global variable to call on
 
 using namespace std;
@@ -40,13 +38,166 @@ void MainWindow::on_start_button_clicked()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
-void MainWindow::update_board(int row_idx, int column_idx) //updating board after piece is down
+void MainWindow::update_board_icons(){ //change icons; does not get until here!!!!!
+    QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
+    QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
+    QIcon icon1(player1_icon);
+    QIcon icon2(player2_icon);
+
+    for(int i=0; i<8; ++i){
+        for(int j=0; j<8; ++j){
+            QString butName="button"+QString::number(i)+QString::number(j);
+            //MainWindow::findChild<QPushButton *>(butName);
+
+            if(button_slots[i][j]==1){
+                //ui->warning_1->setText("update board icons");
+                MainWindow::findChild<QPushButton *>(butName)->setIcon(icon1);
+            }
+            else if(button_slots[i][j]==2){
+                MainWindow::findChild<QPushButton*>(butName)->setIcon(icon2);
+            }
+
+        }
+    }
+}
+
+void MainWindow::end_the_game(int player1_score, int player2_score)
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
+void MainWindow::update_board_score()
+{
+    int player1_score=0;
+    int player2_score=0;
+    int end_game=0;
+
+    for(int i=0; i<8; ++i){
+        for(int j=0; j<8; ++j){
+            if(button_slots[i][j]==1)
+                player1_score++;
+            else if(button_slots[i][j]==2)
+                player2_score++;
+            else if(button_slots[i][j]==0)
+                end_game++;
+        }
+    }
+
+    ui->score_player1->setText(QString::number(player1_score));
+    ui->score_player2->setText(QString::number(player2_score));
+
+    if(end_game==0){
+        end_the_game(player1_score, player2_score);
+    }
+
+}
+
+//does not get until here either!!!
+void MainWindow::change_pieces(int start_idx, int end_idx, int current_player, int direction, int row_idx, int column_idx){ //change value of board
+    if(direction==1){ //when row needs to change; check up and down
+        for(int i=start_idx; i<end_idx+1; ++i){
+            button_slots[i][column_idx]=current_player;
+        }
+
+
+    }else{ //when col needs to change; check sideways
+        for(int i=start_idx; i<end_idx+1; ++i){
+            button_slots[row_idx][i]=current_player;
+        }
+    }
+
+    update_board_icons(); //final update based on value of boxes
+
+    update_board_score();
+}
+
+
+//CURRENTLY WORKING ON HERE!
+void MainWindow::update_board(int row_idx, int column_idx) //updating board after piece is down; determine what needs to change
 {
     int current_player=button_slots[row_idx][column_idx];
+    int opponent_player=0;
+
+    int start_idx=0; //starting and ending indexes
+    int end_idx=0;
+
+    if(current_player==1) //finding opponent and current player value
+        opponent_player=2;
+    else
+        opponent_player=1;
+    //total of 4 cases for now
+
+
+    //================================================================
+    if(button_slots[row_idx+1][column_idx]==opponent_player){ //case for when bottom part is true
+        //works until here
+        start_idx=row_idx+1;
+        end_idx=start_idx;
+
+        while(button_slots[end_idx][column_idx]==opponent_player){
+            //ui->warning_2->setText("hiii");
+            end_idx+=1; //find when stops
+        }
+
+        if(button_slots[end_idx][column_idx]==current_player){
+            //ui->warning_1->setText("It works!");
+            change_pieces(start_idx, end_idx, current_player, 1, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
+        }
+    }
+    //================================================================
+    if(button_slots[row_idx-1][column_idx]==opponent_player){ //case for when top part is true
+        //works until here
+        start_idx=row_idx-1;
+        end_idx=start_idx;
+
+        while(button_slots[end_idx][column_idx]==opponent_player){
+            ui->warning_2->setText("hiii");
+            end_idx-=1; //find when stops
+        }
+
+        if(button_slots[end_idx][column_idx]==current_player){
+            //ui->warning_1->setText("It works!");
+            change_pieces(end_idx, start_idx, current_player, 1, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
+        }
+    }
+    //================================================================
+    if(button_slots[row_idx][column_idx+1]==opponent_player){ //case for when right part is true
+        //works until here
+        start_idx=column_idx+1;
+        end_idx=start_idx;
+        ui->warning_2->setText("hiii"); //testing; this works!
+
+        while(button_slots[row_idx][end_idx]==opponent_player){
+            //ui->warning_2->setText("hiii"); //testing
+            end_idx+=1; //find when stops
+        }
+
+        if(button_slots[row_idx][end_idx]==current_player){
+            ui->warning_1->setText("It works!"); //testing
+            change_pieces(start_idx, end_idx, current_player, 2, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
+        }
+    }
+    //================================================================
+    if(button_slots[row_idx][column_idx-1]==opponent_player){ //case for when top part is true
+
+        start_idx=column_idx-1;
+        end_idx=start_idx;
+
+        while(button_slots[row_idx][end_idx]==opponent_player){
+            //ui->warning_2->setText("hiii");
+            end_idx-=1; //find when stops
+        }
+
+        if(button_slots[row_idx][end_idx]==current_player){
+            //ui->warning_1->setText("It works!");
+            change_pieces(end_idx, start_idx, current_player, 2, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
+        }
+    }
+    //================================================================
 
 
 
-    //check adjacency
+
 }
 
 bool MainWindow::check_in_slot(int row_idx, int column_idx){
@@ -149,6 +300,8 @@ void MainWindow::button_slots_pressed(){
     //button->setIcon(icon1);
     }
 
+    update_board_score(); //update scores
+
 }
 
 
@@ -164,14 +317,8 @@ void MainWindow::on_return_button_clicked()
 }
 
 
-void MainWindow::on_choose_player1_clicked()
+void MainWindow::initialize_board()
 {
-    ui->stackedWidget->setCurrentIndex(3);
-    QPixmap player1;
-    player1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_status.png"); //CHANGE IMAGE DIRECTORY HERE!
-
-    ui->player_status->setPixmap(player1);
-    ui->player_status->show();
 
     QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
     QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
@@ -187,6 +334,21 @@ void MainWindow::on_choose_player1_clicked()
     button_slots[4][3]=2;
     button_slots[4][4]=1;
 
+}
+
+void MainWindow::on_choose_player1_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+    QPixmap player1;
+    player1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_status.png"); //CHANGE IMAGE DIRECTORY HERE!
+
+    ui->player_status->setPixmap(player1);
+    ui->player_status->show();
+
+
+
+
+    initialize_board();
 
 
 }
@@ -202,19 +364,7 @@ void MainWindow::on_choose_player2_clicked()
     ui->player_status->show();
     turn+=1;
 
-    QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
-    QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
-    QIcon icon1(player1_icon);
-    QIcon icon2(player2_icon);
-
-    ui->button33->setIcon(icon1); //initializing board
-    ui->button34->setIcon(icon2);
-    ui->button43->setIcon(icon2);
-    ui->button44->setIcon(icon1);
-    button_slots[3][3]=1;
-    button_slots[3][4]=2;
-    button_slots[4][3]=2;
-    button_slots[4][4]=1;
+    initialize_board();
 
 }
 
