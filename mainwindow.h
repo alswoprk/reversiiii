@@ -24,7 +24,16 @@ private slots:
 
     void on_return_button_clicked();
 
+    void on_choose_player1_clicked(); //choosing players
+
+    void on_choose_player2_clicked();
+
+    void button_slots_pressed();//checking for each button
+
+
+
 private:
     Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H
