@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+//int button_slots[8][8]; //keep track of values
 
 int turn=0; //global variable to call on
 
@@ -39,18 +40,39 @@ void MainWindow::on_start_button_clicked()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
-//
+void MainWindow::update_board(int row_idx, int column_idx) //updating board after piece is down
+{
+    int current_player=button_slots[row_idx][column_idx];
+
+
+
+    //check adjacency
+}
 
 bool MainWindow::check_in_slot(int row_idx, int column_idx){
-    if (button_slots[row_idx][column_idx]!=NULL)
+    if (button_slots[row_idx][column_idx]==1 ||button_slots[row_idx][column_idx]==2 )
         return true;
     else
         return false;
 }
 
+bool MainWindow::check_adjacency(int row_idx, int column_idx){
+    if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2)
+        return false;
+    else if(button_slots[row_idx+1][column_idx]==1||button_slots[row_idx+1][column_idx]==2)
+        return false;
+    else if(button_slots[row_idx][column_idx+1]==1||button_slots[row_idx][column_idx+1]==2)
+        return false;
+    else if(button_slots[row_idx][column_idx-1]==1||button_slots[row_idx][column_idx-1]==2)
+        return false;
+    else
+        return true; //true means cannot place there
+}
+
 void MainWindow::button_slots_pressed(){
 
     QPushButton *button = (QPushButton *)sender();
+
     QString button_name=button->objectName();
 
     //CHANGE IMAGE DIRECTORY HERE!
@@ -62,20 +84,33 @@ void MainWindow::button_slots_pressed(){
     int row_idx; //find rows and columns of button
     int column_idx;
 
-    QString just_row_idx=button_name[-2]; //take just numbers of the value
-    QString just_column_idx=button_name[-1];
+    QString just_row_idx=button_name.mid(6, 1); //take just numbers of the value
+    QString just_column_idx=button_name.mid(7, 1);
 
     row_idx=just_row_idx.toInt(); //convert values to int
     column_idx=just_column_idx.toInt();
 
+    ui->warning_1->setText("You placed on row: "+just_row_idx);
+    ui->warning_2->setText("You placed on column: "+just_column_idx);
+
 
     if(check_in_slot(row_idx, column_idx)){ //check whether button has been placed with something already
         //set error message
+        ui->warning_1->setText("Cannot place here!");
+        ui->warning_2->setText("Cannot place here!");
 
 
         //setting label without qt designer and only comes out for warning signs
         //set label for only couple seconds or terminate when clicked on
     }
+    else if(check_adjacency(row_idx, column_idx)){
+        //if no adjacency, set error message
+        //check if can put down piece
+        ui->warning_1->setText("Cannot place here!");
+        ui->warning_2->setText("Cannot place here!");
+
+    }
+
     else{
 
 
@@ -89,11 +124,11 @@ void MainWindow::button_slots_pressed(){
         ui->player_status->setPixmap(player2);
         ui->player_status->show();
 
-        button_slots[row_idx][column_idx]=1;
+        button_slots[row_idx][column_idx]=1; //send value of icon
 
 
 
-        //send value of icon; find way to figure out which button was pressed
+
     }
     else{
         button->setIcon(icon2);
@@ -104,18 +139,18 @@ void MainWindow::button_slots_pressed(){
         ui->player_status->setPixmap(player1);
         ui->player_status->show();
 
-        button_slots[row_idx][column_idx]=2;
+        button_slots[row_idx][column_idx]=2; //send value of icon
     }
 
 
-
+    update_board(row_idx, column_idx); //change or reverse colors when necessary
     turn+=1; //changing turns
 
     //button->setIcon(icon1);
     }
 
 }
-//
+
 
 void MainWindow::on_rules_button_clicked()
 {
@@ -137,6 +172,23 @@ void MainWindow::on_choose_player1_clicked()
 
     ui->player_status->setPixmap(player1);
     ui->player_status->show();
+
+    QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
+    QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
+    QIcon icon1(player1_icon);
+    QIcon icon2(player2_icon);
+
+    ui->button33->setIcon(icon1); //initializing board
+    ui->button34->setIcon(icon2);
+    ui->button43->setIcon(icon2);
+    ui->button44->setIcon(icon1);
+    button_slots[3][3]=1;
+    button_slots[3][4]=2;
+    button_slots[4][3]=2;
+    button_slots[4][4]=1;
+
+
+
 }
 
 
@@ -149,6 +201,21 @@ void MainWindow::on_choose_player2_clicked()
     ui->player_status->setPixmap(player2);
     ui->player_status->show();
     turn+=1;
+
+    QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
+    QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
+    QIcon icon1(player1_icon);
+    QIcon icon2(player2_icon);
+
+    ui->button33->setIcon(icon1); //initializing board
+    ui->button34->setIcon(icon2);
+    ui->button43->setIcon(icon2);
+    ui->button44->setIcon(icon1);
+    button_slots[3][3]=1;
+    button_slots[3][4]=2;
+    button_slots[4][3]=2;
+    button_slots[4][4]=1;
+
 }
 
 

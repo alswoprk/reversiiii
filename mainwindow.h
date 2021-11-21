@@ -39,6 +39,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     bool check_in_slot(int row_idx, int column_idx); //check whether value is in slot
+    void update_board(int row_idx, int column_idx); //updating board after piece is put down
+    bool check_adjacency(int row_idx, int column_idx); //check whether piece can be put down
     int button_slots[8][8];
 
 
