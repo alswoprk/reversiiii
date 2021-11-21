@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
         }
     }
 
-}
+} #changing a little bit
 
 MainWindow::~MainWindow()
 {
