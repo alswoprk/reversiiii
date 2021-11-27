@@ -111,7 +111,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="choose_player">
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="choose_player_label">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -854,21 +854,8 @@
      <widget class="QLabel" name="warning_1">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>250</y>
-        <width>100</width>
-        <height>100</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="warning_2">
-      <property name="geometry">
-       <rect>
         <x>650</x>
-        <y>250</y>
+        <y>120</y>
         <width>100</width>
         <height>100</height>
        </rect>
@@ -886,8 +873,22 @@
         <height>100</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Modern No. 20</family>
+        <pointsize>36</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+	color: #ffffff;
+}</string>
+      </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QLabel" name="score_player2">
@@ -899,13 +900,27 @@
         <height>100</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Modern No. 20</family>
+        <pointsize>36</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+	color: #ffffff;
+}</string>
+      </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </widget>
     <widget class="QWidget" name="end_page">
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="ending_page_label">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -919,6 +934,87 @@
       </property>
       <property name="pixmap">
        <pixmap>../project/tosize_2/ui_tosize-10.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="player1_final">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>140</y>
+        <width>90</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Modern No. 20</family>
+        <pointsize>48</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+	color: #ffffff;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="player2_final">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>270</y>
+        <width>90</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Modern No. 20</family>
+        <pointsize>48</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+	color: #ffffff;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="final_winner">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>390</y>
+        <width>70</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Modern No. 20</family>
+        <pointsize>48</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+	color: #ffffff;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </widget>

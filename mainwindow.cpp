@@ -12,7 +12,19 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //ui->stackedWidget->
+    QPixmap choosing_player, starting_page, rules_page, ending_page, playing_page;
+    choosing_player.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/choose_player.png"); //CHANGE IMAGE DIRECTORY HERE!
+    starting_page.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/start_page.png");
+    rules_page.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/rules_page.png");
+    playing_page.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/playing_background.png");
+    ending_page.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/ending_page.png");
+
+    //ui->player_status->show();
+    ui->choose_player_label->setPixmap(choosing_player);
+    ui->start_page_label->setPixmap(starting_page);
+    ui->rule_page_label->setPixmap(rules_page);
+    ui->playing_background->setPixmap(playing_page);
+    ui->ending_page_label->setPixmap(ending_page);
 
     QPushButton *button_slots_connect[8][8]; //creating slot names as array; define in header
     for(int i=0; i<8; ++i){
@@ -34,7 +46,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_start_button_clicked()
 {
-    //ui->stackedWidget(start_page)->show()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
@@ -63,10 +74,26 @@ void MainWindow::update_board_icons(){ //change icons; does not get until here!!
 
 void MainWindow::end_the_game(int player1_score, int player2_score)
 {
+    int winner;
     ui->stackedWidget->setCurrentIndex(4);
+    if(player1_score>player2_score){ //decide winner
+        winner=1;
+    }
+    else if(player2_score>player1_score){
+        winner=2;
+    }
+    else{
+        winner=3;
+
+    }
+
+    ui->player1_final->setText(QString::number(player1_score));
+    ui->player2_final->setText(QString::number(player2_score));
+    ui->final_winner->setText(QString::number(winner));
+    //set winner label
 }
 
-void MainWindow::update_board_score()
+void MainWindow::update_board_score() //updating score
 {
     int player1_score=0;
     int player2_score=0;
@@ -92,7 +119,7 @@ void MainWindow::update_board_score()
 
 }
 
-//does not get until here either!!!
+
 void MainWindow::change_pieces(int start_idx, int end_idx, int current_player, int direction, int row_idx, int column_idx){ //change value of board
     if(direction==1){ //when row needs to change; check up and down
         for(int i=start_idx; i<end_idx+1; ++i){
@@ -130,17 +157,17 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
 
     //================================================================
     if(button_slots[row_idx+1][column_idx]==opponent_player){ //case for when bottom part is true
-        //works until here
+
         start_idx=row_idx+1;
         end_idx=start_idx;
 
         while(button_slots[end_idx][column_idx]==opponent_player){
-            //ui->warning_2->setText("hiii");
+
             end_idx+=1; //find when stops
         }
 
         if(button_slots[end_idx][column_idx]==current_player){
-            //ui->warning_1->setText("It works!");
+
             change_pieces(start_idx, end_idx, current_player, 1, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
         }
     }
@@ -151,12 +178,12 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
         end_idx=start_idx;
 
         while(button_slots[end_idx][column_idx]==opponent_player){
-            ui->warning_2->setText("hiii");
+
             end_idx-=1; //find when stops
         }
 
         if(button_slots[end_idx][column_idx]==current_player){
-            //ui->warning_1->setText("It works!");
+
             change_pieces(end_idx, start_idx, current_player, 1, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
         }
     }
@@ -165,15 +192,15 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
         //works until here
         start_idx=column_idx+1;
         end_idx=start_idx;
-        ui->warning_2->setText("hiii"); //testing; this works!
+
 
         while(button_slots[row_idx][end_idx]==opponent_player){
-            //ui->warning_2->setText("hiii"); //testing
+
             end_idx+=1; //find when stops
         }
 
         if(button_slots[row_idx][end_idx]==current_player){
-            ui->warning_1->setText("It works!"); //testing
+
             change_pieces(start_idx, end_idx, current_player, 2, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
         }
     }
@@ -184,12 +211,12 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
         end_idx=start_idx;
 
         while(button_slots[row_idx][end_idx]==opponent_player){
-            //ui->warning_2->setText("hiii");
+
             end_idx-=1; //find when stops
         }
 
         if(button_slots[row_idx][end_idx]==current_player){
-            //ui->warning_1->setText("It works!");
+
             change_pieces(end_idx, start_idx, current_player, 2, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
         }
     }
@@ -200,14 +227,14 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
 
 }
 
-bool MainWindow::check_in_slot(int row_idx, int column_idx){
+bool MainWindow::check_in_slot(int row_idx, int column_idx){ //check whether in slot
     if (button_slots[row_idx][column_idx]==1 ||button_slots[row_idx][column_idx]==2 )
         return true;
     else
         return false;
 }
 
-bool MainWindow::check_adjacency(int row_idx, int column_idx){
+bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent places to see if can be placed
     if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2)
         return false;
     else if(button_slots[row_idx+1][column_idx]==1||button_slots[row_idx+1][column_idx]==2)
@@ -215,6 +242,14 @@ bool MainWindow::check_adjacency(int row_idx, int column_idx){
     else if(button_slots[row_idx][column_idx+1]==1||button_slots[row_idx][column_idx+1]==2)
         return false;
     else if(button_slots[row_idx][column_idx-1]==1||button_slots[row_idx][column_idx-1]==2)
+        return false;
+    else if(button_slots[row_idx-1][column_idx-1]==1||button_slots[row_idx-1][column_idx-1]==2)
+        return false;
+    else if(button_slots[row_idx-1][column_idx+1]==1||button_slots[row_idx-1][column_idx+1]==2)
+        return false;
+    else if(button_slots[row_idx+1][column_idx-1]==1||button_slots[row_idx+1][column_idx-1]==2)
+        return false;
+    else if(button_slots[row_idx+1][column_idx+1]==1||button_slots[row_idx+1][column_idx+1]==2)
         return false;
     else
         return true; //true means cannot place there
@@ -241,14 +276,25 @@ void MainWindow::button_slots_pressed(){
     row_idx=just_row_idx.toInt(); //convert values to int
     column_idx=just_column_idx.toInt();
 
-    ui->warning_1->setText("You placed on row: "+just_row_idx);
-    ui->warning_2->setText("You placed on column: "+just_column_idx);
+    //ui->warning_1->setText("You placed on row: "+just_row_idx);
+    //ui->warning_2->setText("You placed on column: "+just_column_idx);
+
+
+    QPixmap warning1, good;
+    warning1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/error_message.png"); //CHANGE IMAGE DIRECTORY HERE!
+    good.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/good_message.png"); //CHANGE IMAGE DIRECTORY HERE!
+
 
 
     if(check_in_slot(row_idx, column_idx)){ //check whether button has been placed with something already
         //set error message
-        ui->warning_1->setText("Cannot place here!");
-        ui->warning_2->setText("Cannot place here!");
+
+
+        ui->warning_1->setPixmap(warning1);
+        ui->warning_1->show();
+
+        //ui->warning_1->setText("Cannot place here!");
+        //ui->warning_2->setText("Cannot place here!");
 
 
         //setting label without qt designer and only comes out for warning signs
@@ -257,12 +303,18 @@ void MainWindow::button_slots_pressed(){
     else if(check_adjacency(row_idx, column_idx)){
         //if no adjacency, set error message
         //check if can put down piece
-        ui->warning_1->setText("Cannot place here!");
-        ui->warning_2->setText("Cannot place here!");
+
+        ui->warning_1->setPixmap(warning1);
+        ui->warning_1->show();
+        //ui->warning_1->setText("Cannot place here!");
+        //ui->warning_2->setText("Cannot place here!");
 
     }
 
     else{
+
+        ui->warning_1->setPixmap(good); //show good sign when placed correctly
+        ui->warning_1->show();
 
 
 
