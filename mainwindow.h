@@ -42,6 +42,10 @@ private slots:
 
     void on_limited_mode_clicked();
 
+    void on_retry_button_clicked();
+
+    void on_quit_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     void initialize_board(); //starting board
@@ -49,6 +53,7 @@ private:
     void update_board(int row_idx, int column_idx); //updating board after piece is put down
     bool check_adjacency(int row_idx, int column_idx); //check whether piece can be put down
     void change_pieces(int start_idx, int end_idx, int current_player, int direction, int row_idx, int column_idx); //change value of pieces
+    void change_pieces_diag(int start_row_idx, int end_row_idx, int start_col_idx, int end_col_idx, int current_player, int direction);
     void update_board_icons(); //change icons of pieces
     void update_board_score(); //count score
     void end_the_game(); //ending the game when board is full
@@ -57,8 +62,8 @@ private:
     bool limit_mode=false; //when limit mode is on
     int turn=0; //creating turns
     int starting_player=0;
-    int player1_score=0; //scores declared as global so that game can end anytime and scores can be remembered
-    int player2_score=0;
+    int player1_score=2; //scores declared as global so that game can end anytime and scores can be remembered
+    int player2_score=2;
 
 
 };

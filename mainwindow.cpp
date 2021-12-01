@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+#include <QThread>
+
 //int turn=0; //global variable to call on
 
 using namespace std;
@@ -12,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //importing background page labels; must change file direcotry here!
     QPixmap choosing_player, starting_page, rules_page, ending_page, playing_page, choose_mode_page;
     choosing_player.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/choose_player.png"); //CHANGE IMAGE DIRECTORY HERE!
     starting_page.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/start_page.png");
@@ -20,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     ending_page.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/ending_page.png");
     choose_mode_page.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/choose_mode_page.png");
 
-    //ui->player_status->show();
+    //setting background page labels
     ui->choose_player_label->setPixmap(choosing_player);
     ui->start_page_label->setPixmap(starting_page);
     ui->rule_page_label->setPixmap(rules_page);
@@ -28,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->ending_page_label->setPixmap(ending_page);
     ui->choose_mode_background->setPixmap(choose_mode_page);
 
-    QPushButton *button_slots_connect[8][8]; //creating slot names as array; define in header
+    QPushButton *button_slots_connect[8][8]; //creating slot names as array to connect the board buttons
     for(int i=0; i<8; ++i){
         for(int j=0; j<8; ++j){
             QString butName="button"+QString::number(i)+QString::number(j);
@@ -39,43 +42,46 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-MainWindow::~MainWindow()
+MainWindow::~MainWindow() //destructor for ui
 {
     delete ui;
 }
 
 
 
-void MainWindow::on_start_button_clicked()
+void MainWindow::on_start_button_clicked() //when clicking start button
 {
-    ui->stackedWidget->setCurrentIndex(5);
+    ui->stackedWidget->setCurrentIndex(5); //go to choose mode
 }
 
-void MainWindow::update_board_icons(){ //change icons; does not get until here!!!!!
+void MainWindow::update_board_icons(){ //change icons depending on value of the array
     QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
     QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
     QIcon icon1(player1_icon);
     QIcon icon2(player2_icon);
 
-    for(int i=0; i<8; ++i){
+    for(int i=0; i<8; ++i){ //update icons
         for(int j=0; j<8; ++j){
             QString butName="button"+QString::number(i)+QString::number(j);
-            //MainWindow::findChild<QPushButton *>(butName);
 
             if(button_slots[i][j]==1){
-                //ui->warning_1->setText("update board icons");
                 MainWindow::findChild<QPushButton *>(butName)->setIcon(icon1);
             }
             else if(button_slots[i][j]==2){
                 MainWindow::findChild<QPushButton*>(butName)->setIcon(icon2);
+            }
+            else{ //get rid of button icon if value is not for players 1 or 2
+                MainWindow::findChild<QPushButton*>(butName)->setIcon(QIcon());
             }
 
         }
     }
 }
 
-void MainWindow::end_the_game()
+void MainWindow::end_the_game() //shows final results of the game
 {
+    update_board_icons();
+    QThread::sleep(1); //put pause before ending
     int winner;
     ui->stackedWidget->setCurrentIndex(4);
     if(player1_score>player2_score){ //decide winner
@@ -89,8 +95,10 @@ void MainWindow::end_the_game()
 
     }
 
-    if(winner==3){
-        ui->final_winner->setText("1&2");
+    if(winner==3){ //when tied
+        ui->player1_final->setText(QString::number(player1_score));
+        ui->player2_final->setText(QString::number(player2_score));
+        ui->final_winner->setText("Both");
 
     }
     else{
@@ -99,11 +107,9 @@ void MainWindow::end_the_game()
         ui->final_winner->setText(QString::number(winner));
     }
 
-
-    //set winner label
 }
 
-void MainWindow::update_board_score() //updating score
+void MainWindow::update_board_score() //updating score based on the button_slots array
 {
     player1_score=0;
     player2_score=0;
@@ -120,16 +126,17 @@ void MainWindow::update_board_score() //updating score
         }
     }
 
-    ui->score_player1->setText(QString::number(player1_score));
+    ui->score_player1->setText(QString::number(player1_score)); //show scores on playing page
     ui->score_player2->setText(QString::number(player2_score));
 
-    if(end_game==0){
+    if(end_game==0){ //end game if all boards are filled
+
         end_the_game();
     }
 
 }
 
-
+//changes the values of the array according to the results of what must change
 void MainWindow::change_pieces(int start_idx, int end_idx, int current_player, int direction, int row_idx, int column_idx){ //change value of board
     if(direction==1){ //when row needs to change; check up and down
         for(int i=start_idx; i<end_idx+1; ++i){
@@ -143,14 +150,55 @@ void MainWindow::change_pieces(int start_idx, int end_idx, int current_player, i
         }
     }
 
-    update_board_icons(); //final update based on value of boxes
+    update_board_icons(); //final update based on value of boxes; update ui
+    update_board_score(); //update score
+}
 
+
+//===================================================================
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//===================================================================
+
+
+void MainWindow::change_pieces_diag(int start_row_idx, int end_row_idx, int start_col_idx, int end_col_idx, int current_player, int direction){
+    if(direction==1){ //when right bottom or left top is changing
+        while(start_row_idx<=end_row_idx){
+            button_slots[start_row_idx][start_col_idx]=current_player;
+            start_row_idx++;
+            start_col_idx++;
+
+        }
+
+    }
+
+    else if(direction==2){ //when right top is changing
+        while(start_col_idx<=end_col_idx){
+            button_slots[start_row_idx][start_col_idx]=current_player;
+            start_row_idx-=1;
+            start_col_idx++;
+
+        }
+
+    }
+    else{ //when left bottom is changing; direction 3
+        while(start_row_idx<=end_row_idx){
+            button_slots[start_row_idx][start_col_idx]=current_player;
+            start_row_idx+=1;
+            start_col_idx-=1;
+
+        }
+
+    }
+
+    update_board_icons();
     update_board_score();
 }
 
 
-//CURRENTLY WORKING ON HERE!
-void MainWindow::update_board(int row_idx, int column_idx) //updating board after piece is down; determine what needs to change
+
+
+//updating board after piece is down; determine what needs to change
+void MainWindow::update_board(int row_idx, int column_idx)
 {
     int current_player=button_slots[row_idx][column_idx];
     int opponent_player=0;
@@ -158,15 +206,21 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
     int start_idx=0; //starting and ending indexes
     int end_idx=0;
 
+    int start_row_idx=0;
+    int end_row_idx=0;
+    int start_col_idx=0;
+    int end_col_idx=0;
+
     if(current_player==1) //finding opponent and current player value
         opponent_player=2;
     else
         opponent_player=1;
-    //total of 4 cases for now
 
 
-    //================================================================
-    if(button_slots[row_idx+1][column_idx]==opponent_player){ //case for when bottom part is true
+    //=================================================================================
+    //FOR CROSS PATHS
+    //=================================================================================
+    if(button_slots[row_idx+1][column_idx]==opponent_player){ //case for when bottom part is true;
 
         start_idx=row_idx+1;
         end_idx=start_idx;
@@ -176,7 +230,8 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
             end_idx+=1; //find when stops
         }
 
-        if(button_slots[end_idx][column_idx]==current_player){
+
+        if(button_slots[end_idx][column_idx]==current_player && end_idx<8 && end_idx>=0){
 
             change_pieces(start_idx, end_idx, current_player, 1, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
         }
@@ -192,10 +247,12 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
             end_idx-=1; //find when stops
         }
 
-        if(button_slots[end_idx][column_idx]==current_player){
+
+        if(button_slots[end_idx][column_idx]==current_player && end_idx<8 && end_idx>=0){
 
             change_pieces(end_idx, start_idx, current_player, 1, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
         }
+
     }
     //================================================================
     if(button_slots[row_idx][column_idx+1]==opponent_player){ //case for when right part is true
@@ -209,10 +266,11 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
             end_idx+=1; //find when stops
         }
 
-        if(button_slots[row_idx][end_idx]==current_player){
+        if(button_slots[row_idx][end_idx]==current_player && end_idx<8 && end_idx>=0){
 
             change_pieces(start_idx, end_idx, current_player, 2, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
         }
+
     }
     //================================================================
     if(button_slots[row_idx][column_idx-1]==opponent_player){ //case for when top part is true
@@ -224,13 +282,95 @@ void MainWindow::update_board(int row_idx, int column_idx) //updating board afte
 
             end_idx-=1; //find when stops
         }
+        if(end_idx<8 && end_idx>=0){
 
-        if(button_slots[row_idx][end_idx]==current_player){
+        if(button_slots[row_idx][end_idx]==current_player && end_idx<7){
 
             change_pieces(end_idx, start_idx, current_player, 2, row_idx, column_idx); //1 means row needs to change, 2 means col needs to change
         }
+        }
     }
+    //=================================================================================
+    //FOR DIAGONAL PATHS
+    //=================================================================================
+
+
+    if(button_slots[row_idx+1][column_idx+1]==opponent_player){ //case for when right bottom part is true
+
+        start_row_idx=row_idx+1;
+        start_col_idx=column_idx+1;
+        end_row_idx=start_row_idx;
+        end_col_idx=start_col_idx;
+
+        while(button_slots[end_row_idx][end_col_idx]==opponent_player){
+            end_row_idx+=1; //find when stops
+            end_col_idx+=1;
+        }
+
+        if(button_slots[end_row_idx][end_col_idx]==current_player && end_row_idx<8 && end_row_idx>=0 && end_col_idx<8 && end_col_idx>=0){
+            change_pieces_diag(start_row_idx, end_row_idx, start_col_idx, end_col_idx, current_player, 1); //1 means row needs to change, 2 means col needs to change
+        }
+    }
+
     //================================================================
+    if(button_slots[row_idx-1][column_idx+1]==opponent_player){ //case for when right top part is true
+
+        start_row_idx=row_idx-1;
+        start_col_idx=column_idx+1;
+        end_row_idx=start_row_idx;
+        end_col_idx=start_col_idx;
+
+        while(button_slots[end_row_idx][end_col_idx]==opponent_player){
+            end_row_idx-=1; //find when stops
+            end_col_idx+=1;
+        }
+
+        if(button_slots[end_row_idx][end_col_idx]==current_player && end_row_idx<8 && end_row_idx>=0 && end_col_idx<8 && end_col_idx>=0){
+
+            change_pieces_diag(start_row_idx, end_row_idx, start_col_idx, end_col_idx, current_player, 2); //1 means row needs to change, 2 means col needs to change
+        }
+    }
+
+    //================================================================
+    if(button_slots[row_idx-1][column_idx-1]==opponent_player){ //case for when left top part is true
+
+        start_row_idx=row_idx-1;
+        start_col_idx=column_idx-1;
+        end_row_idx=start_row_idx;
+        end_col_idx=start_col_idx;
+
+        while(button_slots[end_row_idx][end_col_idx]==opponent_player){
+            end_row_idx-=1; //find when stops
+            end_col_idx-=1;
+        }
+
+        if(button_slots[end_row_idx][end_col_idx]==current_player && end_row_idx<8 && end_row_idx>=0 && end_col_idx<8 && end_col_idx>=0){
+            change_pieces_diag(end_row_idx, start_row_idx, end_col_idx, start_col_idx, current_player, 1); //1 means row needs to change, 2 means col needs to change
+        }
+    }
+
+
+    //================================================================
+    if(button_slots[row_idx+1][column_idx-1]==opponent_player){ //case for when left bottom part is true
+
+        start_row_idx=row_idx+1;
+        start_col_idx=column_idx-1;
+        end_row_idx=start_row_idx;
+        end_col_idx=start_col_idx;
+
+        while(button_slots[end_row_idx][end_col_idx]==opponent_player){
+            end_row_idx+=1; //find when stops
+            end_col_idx-=1;
+        }
+
+        if(button_slots[end_row_idx][end_col_idx]==current_player && end_row_idx<8 && end_row_idx>=0 && end_col_idx<8 && end_col_idx>=0){
+
+            change_pieces_diag(start_row_idx, end_row_idx, start_col_idx, end_col_idx, current_player, 3); //1 means row needs to change, 2 means col needs to change
+        }
+    }
+
+
+
 
 
 
@@ -245,7 +385,7 @@ bool MainWindow::check_in_slot(int row_idx, int column_idx){ //check whether in 
 }
 
 bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent places to see if can be placed
-    if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2)
+    if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2) //vertical and horizontal check
         return false;
     else if(button_slots[row_idx+1][column_idx]==1||button_slots[row_idx+1][column_idx]==2)
         return false;
@@ -253,7 +393,7 @@ bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent 
         return false;
     else if(button_slots[row_idx][column_idx-1]==1||button_slots[row_idx][column_idx-1]==2)
         return false;
-    else if(button_slots[row_idx-1][column_idx-1]==1||button_slots[row_idx-1][column_idx-1]==2)
+    else if(button_slots[row_idx-1][column_idx-1]==1||button_slots[row_idx-1][column_idx-1]==2) //diagonal check
         return false;
     else if(button_slots[row_idx-1][column_idx+1]==1||button_slots[row_idx-1][column_idx+1]==2)
         return false;
@@ -265,7 +405,7 @@ bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent 
         return true; //true means cannot place there
 }
 
-void MainWindow::button_slots_pressed(){
+void MainWindow::button_slots_pressed(){ //event when board is clicked
 
     QPushButton *button = (QPushButton *)sender();
 
@@ -286,27 +426,20 @@ void MainWindow::button_slots_pressed(){
     row_idx=just_row_idx.toInt(); //convert values to int
     column_idx=just_column_idx.toInt();
 
-    //ui->warning_1->setText("You placed on row: "+just_row_idx);
-    //ui->warning_2->setText("You placed on column: "+just_column_idx);
 
-
-    QPixmap warning1, good;
+    QPixmap warning1, good; //set warning / good signs
     warning1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/error_message.png"); //CHANGE IMAGE DIRECTORY HERE!
     good.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/good_message.png"); //CHANGE IMAGE DIRECTORY HERE!
 
 
 
     if(check_in_slot(row_idx, column_idx)){ //check whether button has been placed with something already
-        //set error message
+        //set error message when trying to place on same spot
 
 
         ui->warning_1->setPixmap(warning1);
         ui->warning_1->show();
 
-
-
-        //setting label without qt designer and only comes out for warning signs
-        //set label for only couple seconds or terminate when clicked on
     }
     else if(check_adjacency(row_idx, column_idx)){
         //if no adjacency, set error message
@@ -323,8 +456,9 @@ void MainWindow::button_slots_pressed(){
 
 
 
-    if(turn%2==0){ //changing turns
+    if(turn%2==0){ //for when player 1 turn
         button->setIcon(icon1);
+        button_slots[row_idx][column_idx]=1; //send value of icon
 
         QPixmap player2; //changing signs of player status
         player2.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_status.png"); //CHANGE IMAGE DIRECTORY HERE!
@@ -332,14 +466,11 @@ void MainWindow::button_slots_pressed(){
         ui->player_status->setPixmap(player2);
         ui->player_status->show();
 
-        button_slots[row_idx][column_idx]=1; //send value of icon
-
-
-
 
     }
-    else{
+    else{ //when player 2 turn
         button->setIcon(icon2);
+        button_slots[row_idx][column_idx]=2; //send value of icon
 
         QPixmap player1; //changing signs of player status
         player1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_status.png"); //CHANGE IMAGE DIRECTORY HERE!
@@ -347,66 +478,65 @@ void MainWindow::button_slots_pressed(){
         ui->player_status->setPixmap(player1);
         ui->player_status->show();
 
-        button_slots[row_idx][column_idx]=2; //send value of icon
+
     }
 
 
-    update_board(row_idx, column_idx); //change or reverse colors when necessary
+    update_board(row_idx, column_idx); //put down or reverse values depending on button just clicked
+    update_board_score(); //update scores
     turn+=1; //changing turns
 
-    //button->setIcon(icon1);
     }
 
-    update_board_score(); //update scores
 
 
-    if(limit_mode==true){
+
+    if(limit_mode==true){ //for when limit mode is played
         if(starting_player==1){
-            if(turn==10)
+            if(turn==10) //end after 10 turns
                 end_the_game();
 
+
         }
+    }
         else{
             if(turn==11)
                 end_the_game();
-        }
     }
 
 }
 
 
-void MainWindow::on_rules_button_clicked()
+void MainWindow::on_rules_button_clicked() //show rules page
 {
     ui->stackedWidget->setCurrentIndex(1);
 }
 
 
-void MainWindow::on_return_button_clicked()
+void MainWindow::on_return_button_clicked() //return to starting page
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
 
 
-void MainWindow::initialize_board()
+void MainWindow::initialize_board() //initialize the board
 {
 
-    QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
-    QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
-    QIcon icon1(player1_icon);
-    QIcon icon2(player2_icon);
+    for (int i = 0; i < 8; i++) //set all board values to 0
+      for (int j = 0; j < 8; j++)
+        button_slots[i][j] = 0;
 
-    ui->button33->setIcon(icon1); //initializing board
-    ui->button34->setIcon(icon2);
-    ui->button43->setIcon(icon2);
-    ui->button44->setIcon(icon1);
-    button_slots[3][3]=1;
+    button_slots[3][3]=1; //initialize the middle part of the board
     button_slots[3][4]=2;
     button_slots[4][3]=2;
     button_slots[4][4]=1;
 
+    update_board_icons(); //update the board and score
+    update_board_score();
+
 }
 
-void MainWindow::on_choose_player1_clicked()
+void MainWindow::on_choose_player1_clicked() //when player 1 is chosen to go first
 {
     starting_player=1;
     ui->stackedWidget->setCurrentIndex(3);
@@ -416,18 +546,13 @@ void MainWindow::on_choose_player1_clicked()
     ui->player_status->setPixmap(player1);
     ui->player_status->show();
 
-
-
-
-
-
     initialize_board();
 
 
 }
 
 
-void MainWindow::on_choose_player2_clicked()
+void MainWindow::on_choose_player2_clicked() //when player 2 is chosen to go first
 {
     starting_player=2;
     ui->stackedWidget->setCurrentIndex(3);
@@ -443,21 +568,36 @@ void MainWindow::on_choose_player2_clicked()
 }
 
 
-void MainWindow::on_ending_button_clicked()
+void MainWindow::on_ending_button_clicked() //end the game no matter what when end button clicked
 {
     end_the_game();
 }
 
 
-void MainWindow::on_normal_mode_clicked()
+void MainWindow::on_normal_mode_clicked() //start normal mode
 {
     ui->stackedWidget->setCurrentIndex(2);
+    ui->mode_name->setText("Normal Mode");
 }
 
 
-void MainWindow::on_limited_mode_clicked()
+void MainWindow::on_limited_mode_clicked() //start limited turn mode
 {
     ui->stackedWidget->setCurrentIndex(2);
+    ui->mode_name->setText("10 Moves");
     limit_mode=true;
+}
+
+
+void MainWindow::on_retry_button_clicked() //redo the game
+{
+    ui->stackedWidget->setCurrentIndex(0);
+
+}
+
+
+void MainWindow::on_quit_button_clicked()
+{
+    QApplication::quit();
 }
 

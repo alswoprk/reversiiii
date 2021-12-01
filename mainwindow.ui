@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="start_page">
      <widget class="QLabel" name="start_page_label">
@@ -192,6 +192,18 @@
        </property>
        <item row="1" column="1">
         <widget class="QPushButton" name="button11">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -202,6 +214,18 @@
        </item>
        <item row="7" column="6">
         <widget class="QPushButton" name="button76">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -212,6 +236,18 @@
        </item>
        <item row="7" column="2">
         <widget class="QPushButton" name="button72">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -222,6 +258,18 @@
        </item>
        <item row="3" column="4">
         <widget class="QPushButton" name="button34">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -232,6 +280,18 @@
        </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="button01">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -242,6 +302,18 @@
        </item>
        <item row="2" column="1">
         <widget class="QPushButton" name="button21">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -252,6 +324,18 @@
        </item>
        <item row="5" column="0">
         <widget class="QPushButton" name="button50">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -262,6 +346,18 @@
        </item>
        <item row="4" column="1">
         <widget class="QPushButton" name="button41">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -272,6 +368,18 @@
        </item>
        <item row="3" column="2">
         <widget class="QPushButton" name="button32">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -282,6 +390,18 @@
        </item>
        <item row="0" column="4">
         <widget class="QPushButton" name="button04">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -292,6 +412,18 @@
        </item>
        <item row="4" column="5">
         <widget class="QPushButton" name="button45">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -302,6 +434,18 @@
        </item>
        <item row="4" column="2">
         <widget class="QPushButton" name="button42">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -312,6 +456,18 @@
        </item>
        <item row="6" column="5">
         <widget class="QPushButton" name="button65">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -322,6 +478,18 @@
        </item>
        <item row="4" column="3">
         <widget class="QPushButton" name="button43">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -332,6 +500,18 @@
        </item>
        <item row="5" column="5">
         <widget class="QPushButton" name="button55">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -342,6 +522,18 @@
        </item>
        <item row="3" column="3">
         <widget class="QPushButton" name="button33">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -352,6 +544,18 @@
        </item>
        <item row="6" column="3">
         <widget class="QPushButton" name="button63">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -362,6 +566,18 @@
        </item>
        <item row="2" column="4">
         <widget class="QPushButton" name="button24">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -372,6 +588,18 @@
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="button10">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -382,6 +610,18 @@
        </item>
        <item row="0" column="6">
         <widget class="QPushButton" name="button06">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -392,6 +632,18 @@
        </item>
        <item row="2" column="0">
         <widget class="QPushButton" name="button20">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -402,6 +654,18 @@
        </item>
        <item row="2" column="5">
         <widget class="QPushButton" name="button25">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -412,6 +676,18 @@
        </item>
        <item row="1" column="5">
         <widget class="QPushButton" name="button15">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -422,6 +698,18 @@
        </item>
        <item row="7" column="3">
         <widget class="QPushButton" name="button73">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -432,6 +720,18 @@
        </item>
        <item row="4" column="7">
         <widget class="QPushButton" name="button47">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -442,6 +742,18 @@
        </item>
        <item row="1" column="4">
         <widget class="QPushButton" name="button14">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -452,6 +764,18 @@
        </item>
        <item row="5" column="4">
         <widget class="QPushButton" name="button54">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -462,6 +786,18 @@
        </item>
        <item row="7" column="4">
         <widget class="QPushButton" name="button74">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -472,6 +808,18 @@
        </item>
        <item row="7" column="0">
         <widget class="QPushButton" name="button70">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -482,6 +830,18 @@
        </item>
        <item row="3" column="6">
         <widget class="QPushButton" name="button36">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -492,6 +852,18 @@
        </item>
        <item row="6" column="1">
         <widget class="QPushButton" name="button61">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -502,6 +874,18 @@
        </item>
        <item row="6" column="0">
         <widget class="QPushButton" name="button60">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -512,6 +896,18 @@
        </item>
        <item row="7" column="5">
         <widget class="QPushButton" name="button75">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -522,6 +918,18 @@
        </item>
        <item row="3" column="1">
         <widget class="QPushButton" name="button31">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -532,6 +940,18 @@
        </item>
        <item row="6" column="6">
         <widget class="QPushButton" name="button66">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -542,6 +962,18 @@
        </item>
        <item row="2" column="6">
         <widget class="QPushButton" name="button26">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -552,6 +984,18 @@
        </item>
        <item row="1" column="6">
         <widget class="QPushButton" name="button16">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -562,6 +1006,18 @@
        </item>
        <item row="4" column="4">
         <widget class="QPushButton" name="button44">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -572,6 +1028,18 @@
        </item>
        <item row="0" column="3">
         <widget class="QPushButton" name="button03">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -582,6 +1050,18 @@
        </item>
        <item row="3" column="7">
         <widget class="QPushButton" name="button37">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -592,6 +1072,18 @@
        </item>
        <item row="1" column="7">
         <widget class="QPushButton" name="button17">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -602,6 +1094,18 @@
        </item>
        <item row="6" column="7">
         <widget class="QPushButton" name="button67">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -612,6 +1116,18 @@
        </item>
        <item row="7" column="7">
         <widget class="QPushButton" name="button77">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -622,6 +1138,18 @@
        </item>
        <item row="5" column="3">
         <widget class="QPushButton" name="button53">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -632,6 +1160,18 @@
        </item>
        <item row="6" column="2">
         <widget class="QPushButton" name="button62">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -642,6 +1182,18 @@
        </item>
        <item row="3" column="5">
         <widget class="QPushButton" name="button35">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -652,6 +1204,18 @@
        </item>
        <item row="0" column="2">
         <widget class="QPushButton" name="button02">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -662,6 +1226,18 @@
        </item>
        <item row="2" column="3">
         <widget class="QPushButton" name="button23">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -672,6 +1248,18 @@
        </item>
        <item row="0" column="7">
         <widget class="QPushButton" name="button07">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -682,6 +1270,18 @@
        </item>
        <item row="4" column="6">
         <widget class="QPushButton" name="button46">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -692,6 +1292,18 @@
        </item>
        <item row="5" column="6">
         <widget class="QPushButton" name="button56">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -702,6 +1314,18 @@
        </item>
        <item row="7" column="1">
         <widget class="QPushButton" name="button71">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -712,6 +1336,18 @@
        </item>
        <item row="1" column="3">
         <widget class="QPushButton" name="button13">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -722,6 +1358,18 @@
        </item>
        <item row="0" column="5">
         <widget class="QPushButton" name="button05">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -732,6 +1380,18 @@
        </item>
        <item row="3" column="0">
         <widget class="QPushButton" name="button30">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -742,6 +1402,18 @@
        </item>
        <item row="5" column="1">
         <widget class="QPushButton" name="button51">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -753,10 +1425,16 @@
        <item row="0" column="0">
         <widget class="QPushButton" name="button00">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
          </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
@@ -768,6 +1446,18 @@
        </item>
        <item row="2" column="2">
         <widget class="QPushButton" name="button22">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -778,6 +1468,18 @@
        </item>
        <item row="5" column="7">
         <widget class="QPushButton" name="button57">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -788,6 +1490,18 @@
        </item>
        <item row="4" column="0">
         <widget class="QPushButton" name="button40">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -798,6 +1512,18 @@
        </item>
        <item row="2" column="7">
         <widget class="QPushButton" name="button27">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -808,6 +1534,18 @@
        </item>
        <item row="1" column="2">
         <widget class="QPushButton" name="button12">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -818,6 +1556,18 @@
        </item>
        <item row="5" column="2">
         <widget class="QPushButton" name="button52">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -828,6 +1578,18 @@
        </item>
        <item row="6" column="4">
         <widget class="QPushButton" name="button64">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true">background: transparent;</string>
          </property>
@@ -937,6 +1699,33 @@
        <string/>
       </property>
      </widget>
+     <widget class="QLabel" name="mode_name">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>270</y>
+        <width>121</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Modern No. 20</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+	color: #ffffff;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="end_page">
      <widget class="QLabel" name="ending_page_label">
@@ -952,7 +1741,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../project/tosize_2/ui_tosize-10.png</pixmap>
+       <pixmap>tosize_2/ending_page.png</pixmap>
       </property>
      </widget>
      <widget class="QLabel" name="player1_final">
@@ -1014,14 +1803,14 @@
        <rect>
         <x>280</x>
         <y>390</y>
-        <width>70</width>
+        <width>111</width>
         <height>70</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Modern No. 20</family>
-        <pointsize>48</pointsize>
+        <pointsize>36</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -1034,6 +1823,38 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="retry_button">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>510</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="quit_button">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>510</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
