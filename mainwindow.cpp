@@ -1,7 +1,9 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-#include <QThread>
+#include <QThread> //for putting pause
+#include <random>
+#include <iostream>
 
 //int turn=0; //global variable to call on
 
@@ -54,6 +56,7 @@ void MainWindow::on_start_button_clicked() //when clicking start button
     ui->stackedWidget->setCurrentIndex(5); //go to choose mode
 }
 
+//updates entire board icons
 void MainWindow::update_board_icons(){ //change icons depending on value of the array
     QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
     QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
@@ -81,7 +84,7 @@ void MainWindow::update_board_icons(){ //change icons depending on value of the 
 void MainWindow::end_the_game() //shows final results of the game
 {
     update_board_icons();
-    QThread::sleep(1); //put pause before ending
+    //QThread::sleep(1); //put pause before ending
     int winner;
     ui->stackedWidget->setCurrentIndex(4);
     if(player1_score>player2_score){ //decide winner
@@ -155,11 +158,7 @@ void MainWindow::change_pieces(int start_idx, int end_idx, int current_player, i
 }
 
 
-//===================================================================
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//===================================================================
-
-
+//changes the array values
 void MainWindow::change_pieces_diag(int start_row_idx, int end_row_idx, int start_col_idx, int end_col_idx, int current_player, int direction){
     if(direction==1){ //when right bottom or left top is changing
         while(start_row_idx<=end_row_idx){
@@ -238,7 +237,7 @@ void MainWindow::update_board(int row_idx, int column_idx)
     }
     //================================================================
     if(button_slots[row_idx-1][column_idx]==opponent_player){ //case for when top part is true
-        //works until here
+
         start_idx=row_idx-1;
         end_idx=start_idx;
 
@@ -385,24 +384,59 @@ bool MainWindow::check_in_slot(int row_idx, int column_idx){ //check whether in 
 }
 
 bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent places to see if can be placed
-    if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2) //vertical and horizontal check
-        return false;
-    else if(button_slots[row_idx+1][column_idx]==1||button_slots[row_idx+1][column_idx]==2)
-        return false;
-    else if(button_slots[row_idx][column_idx+1]==1||button_slots[row_idx][column_idx+1]==2)
-        return false;
-    else if(button_slots[row_idx][column_idx-1]==1||button_slots[row_idx][column_idx-1]==2)
-        return false;
-    else if(button_slots[row_idx-1][column_idx-1]==1||button_slots[row_idx-1][column_idx-1]==2) //diagonal check
-        return false;
-    else if(button_slots[row_idx-1][column_idx+1]==1||button_slots[row_idx-1][column_idx+1]==2)
-        return false;
-    else if(button_slots[row_idx+1][column_idx-1]==1||button_slots[row_idx+1][column_idx-1]==2)
-        return false;
-    else if(button_slots[row_idx+1][column_idx+1]==1||button_slots[row_idx+1][column_idx+1]==2)
-        return false;
+
+    if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2){//vertical and horizontal check
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx+1][column_idx]==1||button_slots[row_idx+1][column_idx]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx][column_idx+1]==1||button_slots[row_idx][column_idx+1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx][column_idx-1]==1||button_slots[row_idx][column_idx-1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx-1][column_idx-1]==1||button_slots[row_idx-1][column_idx-1]==2){ //diagonal check
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
+            return false;
+        else
+            return true;
+    }
+
+    else if(button_slots[row_idx-1][column_idx+1]==1||button_slots[row_idx-1][column_idx+1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx+1][column_idx-1]==1||button_slots[row_idx+1][column_idx-1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx+1][column_idx+1]==1||button_slots[row_idx+1][column_idx+1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
+            return false;
+        else
+            return true;
+    }
     else
         return true; //true means cannot place there
+
 }
 
 void MainWindow::button_slots_pressed(){ //event when board is clicked
@@ -433,9 +467,14 @@ void MainWindow::button_slots_pressed(){ //event when board is clicked
 
 
 
+    //==================================================================================================
+    //NON-AI MODE
+    //==================================================================================================
+
+
+
     if(check_in_slot(row_idx, column_idx)){ //check whether button has been placed with something already
         //set error message when trying to place on same spot
-
 
         ui->warning_1->setPixmap(warning1);
         ui->warning_1->show();
@@ -456,39 +495,48 @@ void MainWindow::button_slots_pressed(){ //event when board is clicked
 
 
 
-    if(turn%2==0){ //for when player 1 turn
-        button->setIcon(icon1);
-        button_slots[row_idx][column_idx]=1; //send value of icon
+        if(turn%2==0){ //for when player 1 turn
+            button->setIcon(icon1);
+            button_slots[row_idx][column_idx]=1; //send value of icon
 
-        QPixmap player2; //changing signs of player status
-        player2.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_status.png"); //CHANGE IMAGE DIRECTORY HERE!
+            if(ai_mode==false){
+                QPixmap player2; //changing signs of player status
+                player2.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_status.png"); //CHANGE IMAGE DIRECTORY HERE!
 
-        ui->player_status->setPixmap(player2);
-        ui->player_status->show();
+                ui->player_status->setPixmap(player2);
+                ui->player_status->show();
+            }
 
+
+
+        }
+        else{ //when player 2 turn
+            button->setIcon(icon2);
+            button_slots[row_idx][column_idx]=2; //send value of icon
+
+            if(ai_mode==false){
+                QPixmap player1; //changing signs of player status
+                player1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_status.png"); //CHANGE IMAGE DIRECTORY HERE!
+
+                ui->player_status->setPixmap(player1);
+                ui->player_status->show();
+            }
+
+
+
+        }
+
+
+        update_board(row_idx, column_idx); //put down or reverse values depending on button just clicked
+        update_board_score(); //update scores
+        turn+=1; //changing turns
+
+
+
+        if(ai_mode)
+            ai_turn();
 
     }
-    else{ //when player 2 turn
-        button->setIcon(icon2);
-        button_slots[row_idx][column_idx]=2; //send value of icon
-
-        QPixmap player1; //changing signs of player status
-        player1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_status.png"); //CHANGE IMAGE DIRECTORY HERE!
-
-        ui->player_status->setPixmap(player1);
-        ui->player_status->show();
-
-
-    }
-
-
-    update_board(row_idx, column_idx); //put down or reverse values depending on button just clicked
-    update_board_score(); //update scores
-    turn+=1; //changing turns
-
-    }
-
-
 
 
     if(limit_mode==true){ //for when limit mode is played
@@ -496,15 +544,345 @@ void MainWindow::button_slots_pressed(){ //event when board is clicked
             if(turn==10) //end after 10 turns
                 end_the_game();
 
-
         }
-    }
+
         else{
             if(turn==11)
                 end_the_game();
+        }
     }
 
+
 }
+
+
+//==================================================================================================
+//AI MODE
+//==================================================================================================
+
+
+bool MainWindow::check_adjacency_ai(int row_idx, int column_idx){ //check adjacent places for ai mode
+
+
+    if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2){//vertical and horizontal check
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
+                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
+                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx+1][column_idx]==1||button_slots[row_idx+1][column_idx]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
+                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
+                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx][column_idx+1]==1||button_slots[row_idx][column_idx+1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
+                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
+                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx][column_idx-1]==1||button_slots[row_idx][column_idx-1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
+                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
+                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx-1][column_idx-1]==1||button_slots[row_idx-1][column_idx-1]==2){ //diagonal check
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
+                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
+                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+            return false;
+        else
+            return true;
+    }
+
+    else if(button_slots[row_idx-1][column_idx+1]==1||button_slots[row_idx-1][column_idx+1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
+                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
+                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx+1][column_idx-1]==1||button_slots[row_idx+1][column_idx-1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
+                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
+                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+            return false;
+        else
+            return true;
+    }
+    else if(button_slots[row_idx+1][column_idx+1]==1||button_slots[row_idx+1][column_idx+1]==2){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
+                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
+                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+            return false;
+        else
+            return true;
+    }
+    else
+        return true; //true means cannot place there
+}
+
+void MainWindow::ai_turn()
+{
+    int trial_row=0;
+    int trial_column=0;
+    int trial_value=0;
+
+    int final_row=0;
+    int final_column=0;
+    int final_value=0;
+
+    QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
+    QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
+    QIcon icon1(player1_icon);
+    QIcon icon2(player2_icon);
+
+
+    for(int i=0; i<5; ++i) //checks 5 different spots to find optimal spot
+    {
+        while(true)
+        {
+            trial_row=rand()%8;
+            trial_column=rand()%8;
+            if(check_in_slot(trial_row, trial_column)==false && check_adjacency_ai(trial_row, trial_column)==false)
+            { //can put down piece
+                break;
+            }
+        }
+
+        trial_value=check_value(trial_row, trial_column); //checks what if value
+
+        if(trial_value>=final_value){
+            final_value=trial_value;
+            final_row=trial_row;
+            final_column=trial_column;
+        }
+
+
+    }
+
+
+    QString butName="button"+QString::number(final_row)+QString::number(final_column);
+    if(computer_player==1){
+        MainWindow::findChild<QPushButton *>(butName)->setIcon(icon1);
+    }else{
+        MainWindow::findChild<QPushButton *>(butName)->setIcon(icon2);
+    }
+
+    button_slots[final_row][final_column]=computer_player; //change to final later
+
+    update_board(final_row, final_column); //change to final later
+    update_board_score();
+
+    turn+=1;
+
+}
+
+
+int MainWindow::check_value(int trial_row, int trial_column) //predicts value
+{
+    //ui->warning_1->setText("here!");
+    int current_player=computer_player;
+    int opponent_player=0;
+    int total_score=0;
+
+    int start_idx=0; //starting and ending indexes
+    int end_idx=0;
+
+    int start_row_idx=0;
+    int end_row_idx=0;
+    int start_col_idx=0;
+    int end_col_idx=0;
+
+    if(current_player==1) //finding opponent and current player value
+        opponent_player=2;
+    else
+        opponent_player=1;
+
+
+    //=================================================================================
+    //FOR CROSS PATHS
+    //=================================================================================
+    if(button_slots[trial_row+1][trial_column]==opponent_player){ //case for when bottom part is true;
+        int insert_value=0;
+        start_idx=trial_row+1;
+        end_idx=start_idx;
+
+        while(button_slots[end_idx][trial_column]==opponent_player){
+            insert_value++;
+            end_idx+=1; //find when stops
+        }
+
+
+        if(button_slots[end_idx][trial_column]==current_player && end_idx<8 && end_idx>=0){
+
+            total_score=total_score+insert_value; //adding to total score
+        }
+    }
+    //================================================================
+    if(button_slots[trial_row-1][trial_column]==opponent_player){ //case for when top part is true
+        //works until here
+        start_idx=trial_row-1;
+        end_idx=start_idx;
+        int insert_value=0;
+        while(button_slots[end_idx][trial_column]==opponent_player){
+
+            end_idx-=1; //find when stops
+            insert_value++;
+        }
+
+
+        if(button_slots[end_idx][trial_column]==current_player && end_idx<8 && end_idx>=0){
+
+            total_score=total_score+insert_value; //adding to total score
+        }
+
+    }
+    //================================================================
+    if(button_slots[trial_row][trial_column+1]==opponent_player){ //case for when right part is true
+        //works until here
+        start_idx=trial_column+1;
+        end_idx=start_idx;
+        int insert_value=0;
+
+        while(button_slots[trial_row][end_idx]==opponent_player){
+
+            end_idx+=1; //find when stops
+            insert_value++;
+        }
+
+        if(button_slots[trial_row][end_idx]==current_player && end_idx<8 && end_idx>=0){
+
+            total_score=total_score+insert_value; //adding to total score
+        }
+
+    }
+    //================================================================
+    if(button_slots[trial_row][trial_column-1]==opponent_player){ //case for when top part is true
+
+        start_idx=trial_column-1;
+        end_idx=start_idx;
+        int insert_value=0;
+
+        while(button_slots[trial_row][end_idx]==opponent_player){
+
+            end_idx-=1; //find when stops
+            insert_value++;
+        }
+        if(end_idx<8 && end_idx>=0){
+
+        if(button_slots[trial_row][end_idx]==current_player && end_idx<7){
+
+            total_score=total_score+insert_value; //adding to total score
+        }
+        }
+    }
+    //=================================================================================
+    //FOR DIAGONAL PATHS
+    //=================================================================================
+
+
+    if(button_slots[trial_row][trial_column+1]==opponent_player){ //case for when right bottom part is true
+
+        start_row_idx=trial_row+1;
+        start_col_idx=trial_column+1;
+        end_row_idx=start_row_idx;
+        end_col_idx=start_col_idx;
+
+        int insert_value=0;
+
+        while(button_slots[end_row_idx][end_col_idx]==opponent_player){
+            end_row_idx+=1; //find when stops
+            end_col_idx+=1;
+            insert_value++;
+        }
+
+        if(button_slots[end_row_idx][end_col_idx]==current_player && end_row_idx<8 && end_row_idx>=0 && end_col_idx<8 && end_col_idx>=0){
+            total_score=total_score+insert_value; //adding to total score
+        }
+    }
+
+    //================================================================
+    if(button_slots[trial_row-1][trial_row+1]==opponent_player){ //case for when right top part is true
+
+        start_row_idx=trial_row-1;
+        start_col_idx=trial_column+1;
+        end_row_idx=start_row_idx;
+        end_col_idx=start_col_idx;
+
+        int insert_value=0;
+
+        while(button_slots[end_row_idx][end_col_idx]==opponent_player){
+            end_row_idx-=1; //find when stops
+            end_col_idx+=1;
+            insert_value++;
+        }
+
+        if(button_slots[end_row_idx][end_col_idx]==current_player && end_row_idx<8 && end_row_idx>=0 && end_col_idx<8 && end_col_idx>=0){
+
+            total_score=total_score+insert_value; //adding to total score
+        }
+    }
+
+    //================================================================
+    if(button_slots[trial_row-1][trial_column-1]==opponent_player){ //case for when left top part is true
+
+        start_row_idx=trial_row-1;
+        start_col_idx=trial_column-1;
+        end_row_idx=start_row_idx;
+        end_col_idx=start_col_idx;
+
+        int insert_value=0;
+
+        while(button_slots[end_row_idx][end_col_idx]==opponent_player){
+            end_row_idx-=1; //find when stops
+            end_col_idx-=1;
+            insert_value++;
+        }
+
+        if(button_slots[end_row_idx][end_col_idx]==current_player && end_row_idx<8 && end_row_idx>=0 && end_col_idx<8 && end_col_idx>=0){
+            total_score=total_score+insert_value; //adding to total score
+        }
+    }
+
+
+    //================================================================
+    if(button_slots[trial_row+1][trial_column-1]==opponent_player){ //case for when left bottom part is true
+
+        start_row_idx=trial_row+1;
+        start_col_idx=trial_column-1;
+        end_row_idx=start_row_idx;
+        end_col_idx=start_col_idx;
+
+        int insert_value=0;
+
+        while(button_slots[end_row_idx][end_col_idx]==opponent_player){
+            end_row_idx+=1; //find when stops
+            end_col_idx-=1;
+            insert_value++;
+        }
+
+        if(button_slots[end_row_idx][end_col_idx]==current_player && end_row_idx<8 && end_row_idx>=0 && end_col_idx<8 && end_col_idx>=0){
+
+            total_score=total_score+insert_value; //adding to total score
+        }
+    }
+
+    return total_score;
+
+}
+
 
 
 void MainWindow::on_rules_button_clicked() //show rules page
@@ -538,6 +916,9 @@ void MainWindow::initialize_board() //initialize the board
 
 void MainWindow::on_choose_player1_clicked() //when player 1 is chosen to go first
 {
+    if(ai_mode){
+        computer_player=2;
+    }
     starting_player=1;
     ui->stackedWidget->setCurrentIndex(3);
     QPixmap player1;
@@ -599,5 +980,13 @@ void MainWindow::on_retry_button_clicked() //redo the game
 void MainWindow::on_quit_button_clicked()
 {
     QApplication::quit();
+}
+
+
+void MainWindow::on_ai_versus_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    ui->mode_name->setText("AI Mode");
+    ai_mode=true;
 }
 

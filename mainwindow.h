@@ -46,6 +46,8 @@ private slots:
 
     void on_quit_button_clicked();
 
+    void on_ai_versus_clicked();
+
 private:
     Ui::MainWindow *ui;
     void initialize_board(); //starting board
@@ -57,13 +59,27 @@ private:
     void update_board_icons(); //change icons of pieces
     void update_board_score(); //count score
     void end_the_game(); //ending the game when board is full
-    int button_slots[8][8]={0}; //initialize to zero
+    int button_slots[8][8]={{0, 0, 0, 0, 0, 0, 0, 0},
+                           {0, 0, 0, 0, 0, 0, 0, 0},
+                           {0, 0, 0, 0, 0, 0, 0, 0},
+                           {0, 0, 0, 0, 0, 0, 0, 0},
+                           {0, 0, 0, 0, 0, 0, 0, 0},
+                           {0, 0, 0, 0, 0, 0, 0, 0},
+                           {0, 0, 0, 0, 0, 0, 0, 0},
+                           {0, 0, 0, 0, 0, 0, 0, 0}}; //initialize to zero
+
+    int check_value(int trial_row, int trial_column); //check value for ai mode
+    int computer_player=1;
+    void ai_turn();
+    bool check_adjacency_ai(int row_idx, int column_idx);
 
     bool limit_mode=false; //when limit mode is on
+    bool ai_mode=false; //when playing against computer
     int turn=0; //creating turns
     int starting_player=0;
     int player1_score=2; //scores declared as global so that game can end anytime and scores can be remembered
     int player2_score=2;
+
 
 
 };
