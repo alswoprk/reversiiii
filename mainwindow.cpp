@@ -564,67 +564,51 @@ void MainWindow::button_slots_pressed(){ //event when board is clicked
 bool MainWindow::check_adjacency_ai(int row_idx, int column_idx){ //check adjacent places for ai mode
 
 
-    if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2){//vertical and horizontal check
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
-                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
-                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+    if((button_slots[row_idx-1][column_idx]==1 && row_idx-1>=0 && row_idx<8)||(button_slots[row_idx-1][column_idx]==2&& row_idx-1>=0 && row_idx<8)){//vertical and horizontal check
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
             return false;
         else
             return true;
     }
-    else if(button_slots[row_idx+1][column_idx]==1||button_slots[row_idx+1][column_idx]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
-                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
-                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+    else if((button_slots[row_idx+1][column_idx]==1 && row_idx+1>=0 && row_idx+1<8)||(button_slots[row_idx+1][column_idx]==2 && row_idx+1>=0 && row_idx+1<8)){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
             return false;
         else
             return true;
     }
-    else if(button_slots[row_idx][column_idx+1]==1||button_slots[row_idx][column_idx+1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
-                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
-                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+    else if((button_slots[row_idx][column_idx+1]==1 && column_idx+1>=0 && column_idx+1<8)||(button_slots[row_idx][column_idx+1]==2&& column_idx+1>=0 && column_idx+1<8)){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
             return false;
         else
             return true;
     }
-    else if(button_slots[row_idx][column_idx-1]==1||button_slots[row_idx][column_idx-1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
-                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
-                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+    else if((button_slots[row_idx][column_idx-1]==1 && column_idx-1>=0 && column_idx-1<8)||(button_slots[row_idx][column_idx-1]==2 && column_idx-1>=0 && column_idx-1<8)){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
             return false;
         else
             return true;
     }
-    else if(button_slots[row_idx-1][column_idx-1]==1||button_slots[row_idx-1][column_idx-1]==2){ //diagonal check
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
-                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
-                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+    else if((button_slots[row_idx-1][column_idx-1]==1 && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)||(button_slots[row_idx-1][column_idx-1]==2 && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)){ //diagonal check
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
             return false;
         else
             return true;
     }
 
-    else if(button_slots[row_idx-1][column_idx+1]==1||button_slots[row_idx-1][column_idx+1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
-                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
-                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+    else if((button_slots[row_idx-1][column_idx+1]==1 && row_idx-1>=0 && row_idx-1<8 && column_idx+1>=0 && column_idx+1<8)||(button_slots[row_idx-1][column_idx+1]==2 && row_idx-1>=0 && row_idx-1<8 && column_idx+1>=0 && column_idx+1<8)){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
             return false;
         else
             return true;
     }
-    else if(button_slots[row_idx+1][column_idx-1]==1||button_slots[row_idx+1][column_idx-1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
-                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
-                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+    else if((button_slots[row_idx+1][column_idx-1]==1 && row_idx+1>=0 && row_idx+1<8 && column_idx-1>=0 && column_idx-1<8)||(button_slots[row_idx+1][column_idx-1]==2 && row_idx+1>=0 && row_idx+1<8 && column_idx-1>=0 && column_idx-1<8)){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
             return false;
         else
             return true;
     }
-    else if(button_slots[row_idx+1][column_idx+1]==1||button_slots[row_idx+1][column_idx+1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8
-                && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8
-                && row_idx-1>=0 && row_idx-1<8 && column_idx-1>=0 && column_idx-1<8)
+    else if((button_slots[row_idx+1][column_idx+1]==1 && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8)||(button_slots[row_idx+1][column_idx+1]==2 && row_idx+1>=0 && row_idx+1<8 && column_idx+1>=0 && column_idx+1<8)){
+        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
             return false;
         else
             return true;
