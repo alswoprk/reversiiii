@@ -48,6 +48,8 @@ private slots:
 
     void on_ai_versus_clicked();
 
+    void on_hard_mode_clicked();
+
 private:
     Ui::MainWindow *ui;
     void initialize_board(); //starting board
@@ -75,6 +77,7 @@ private:
 
     bool limit_mode=false; //when limit mode is on
     bool ai_mode=false; //when playing against computer
+    bool hard_mode=false;
     int turn=0; //creating turns
     int starting_player=0;
     int player1_score=2; //scores declared as global so that game can end anytime and scores can be remembered

@@ -104,7 +104,7 @@ void MainWindow::end_the_game() //shows final results of the game
         ui->final_winner->setText("Both");
 
     }
-    else{
+    else{ //show scores for each player
         ui->player1_final->setText(QString::number(player1_score));
         ui->player2_final->setText(QString::number(player2_score));
         ui->final_winner->setText(QString::number(winner));
@@ -158,7 +158,7 @@ void MainWindow::change_pieces(int start_idx, int end_idx, int current_player, i
 }
 
 
-//changes the array values
+//changes the array values when diagonal pieces must change; just values of array are changing
 void MainWindow::change_pieces_diag(int start_row_idx, int end_row_idx, int start_col_idx, int end_col_idx, int current_player, int direction){
     if(direction==1){ //when right bottom or left top is changing
         while(start_row_idx<=end_row_idx){
@@ -189,7 +189,7 @@ void MainWindow::change_pieces_diag(int start_row_idx, int end_row_idx, int star
 
     }
 
-    update_board_icons();
+    update_board_icons(); //update icons and score
     update_board_score();
 }
 
@@ -382,7 +382,7 @@ bool MainWindow::check_in_slot(int row_idx, int column_idx){ //check whether in 
     else
         return false;
 }
-
+/*
 bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent places to see if can be placed
 
     if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2){//vertical and horizontal check
@@ -437,131 +437,10 @@ bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent 
     else
         return true; //true means cannot place there
 
-}
-
-void MainWindow::button_slots_pressed(){ //event when board is clicked
-
-    QPushButton *button = (QPushButton *)sender();
-
-    QString button_name=button->objectName();
-
-    //CHANGE IMAGE DIRECTORY HERE!
-    QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
-    QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
-    QIcon icon1(player1_icon);
-    QIcon icon2(player2_icon);
-
-    int row_idx; //find rows and columns of button
-    int column_idx;
-
-    QString just_row_idx=button_name.mid(6, 1); //take just numbers of the value
-    QString just_column_idx=button_name.mid(7, 1);
-
-    row_idx=just_row_idx.toInt(); //convert values to int
-    column_idx=just_column_idx.toInt();
+}*/
 
 
-    QPixmap warning1, good; //set warning / good signs
-    warning1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/error_message.png"); //CHANGE IMAGE DIRECTORY HERE!
-    good.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/good_message.png"); //CHANGE IMAGE DIRECTORY HERE!
-
-
-
-    //==================================================================================================
-    //NON-AI MODE
-    //==================================================================================================
-
-
-
-    if(check_in_slot(row_idx, column_idx)){ //check whether button has been placed with something already
-        //set error message when trying to place on same spot
-
-        ui->warning_1->setPixmap(warning1);
-        ui->warning_1->show();
-
-    }
-    else if(check_adjacency(row_idx, column_idx)){
-        //if no adjacency, set error message
-        //check if can put down piece
-
-        ui->warning_1->setPixmap(warning1);
-        ui->warning_1->show();
-    }
-
-    else{
-
-        ui->warning_1->setPixmap(good); //show good sign when placed correctly
-        ui->warning_1->show();
-
-
-
-        if(turn%2==0){ //for when player 1 turn
-            button->setIcon(icon1);
-            button_slots[row_idx][column_idx]=1; //send value of icon
-
-            if(ai_mode==false){
-                QPixmap player2; //changing signs of player status
-                player2.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_status.png"); //CHANGE IMAGE DIRECTORY HERE!
-
-                ui->player_status->setPixmap(player2);
-                ui->player_status->show();
-            }
-
-
-
-        }
-        else{ //when player 2 turn
-            button->setIcon(icon2);
-            button_slots[row_idx][column_idx]=2; //send value of icon
-
-            if(ai_mode==false){
-                QPixmap player1; //changing signs of player status
-                player1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_status.png"); //CHANGE IMAGE DIRECTORY HERE!
-
-                ui->player_status->setPixmap(player1);
-                ui->player_status->show();
-            }
-
-
-
-        }
-
-
-        update_board(row_idx, column_idx); //put down or reverse values depending on button just clicked
-        update_board_score(); //update scores
-        turn+=1; //changing turns
-
-
-
-        if(ai_mode)
-            ai_turn();
-
-    }
-
-
-    if(limit_mode==true){ //for when limit mode is played
-        if(starting_player==1){
-            if(turn==10) //end after 10 turns
-                end_the_game();
-
-        }
-
-        else{
-            if(turn==11)
-                end_the_game();
-        }
-    }
-
-
-}
-
-
-//==================================================================================================
-//AI MODE
-//==================================================================================================
-
-
-bool MainWindow::check_adjacency_ai(int row_idx, int column_idx){ //check adjacent places for ai mode
+bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent places and see if piece can be put down
 
 
     if((button_slots[row_idx-1][column_idx]==1 && row_idx-1>=0 && row_idx<8)||(button_slots[row_idx-1][column_idx]==2&& row_idx-1>=0 && row_idx<8)){//vertical and horizontal check
@@ -617,7 +496,131 @@ bool MainWindow::check_adjacency_ai(int row_idx, int column_idx){ //check adjace
         return true; //true means cannot place there
 }
 
-void MainWindow::ai_turn()
+void MainWindow::button_slots_pressed(){ //event when board is clicked
+
+    QPushButton *button = (QPushButton *)sender();
+
+    QString button_name=button->objectName();
+
+    //CHANGE IMAGE DIRECTORY HERE!
+    QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
+    QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
+    QIcon icon1(player1_icon);
+    QIcon icon2(player2_icon);
+
+    int row_idx; //find rows and columns of button
+    int column_idx;
+
+    QString just_row_idx=button_name.mid(6, 1); //take just numbers of the value
+    QString just_column_idx=button_name.mid(7, 1);
+
+    row_idx=just_row_idx.toInt(); //convert values to int to find row and col index
+    column_idx=just_column_idx.toInt();
+
+
+    QPixmap warning1, good; //set warning / good signs
+    warning1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/error_message.png"); //CHANGE IMAGE DIRECTORY HERE!
+    good.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/good_message.png"); //CHANGE IMAGE DIRECTORY HERE!
+
+
+
+    //==================================================================================================
+    //NON-AI MODE
+    //==================================================================================================
+
+
+
+    if(check_in_slot(row_idx, column_idx)){ //check whether button has been placed with something already
+        //set error message when trying to place on same spot
+
+        ui->warning_1->setPixmap(warning1);
+        ui->warning_1->show();
+
+    }
+    else if(check_adjacency(row_idx, column_idx)){ //check if piece is adjacent to it
+        //if no adjacency, set error message
+        //check if can put down piece
+
+        ui->warning_1->setPixmap(warning1);
+        ui->warning_1->show();
+    }
+
+    else{
+
+        ui->warning_1->setPixmap(good); //show good sign when placed correctly
+        ui->warning_1->show();
+
+
+
+        if(turn%2==0){ //for when player 1 turn
+            button->setIcon(icon1);
+            button_slots[row_idx][column_idx]=1; //send value of icon
+
+            if(ai_mode==false){ //change player status for non ai mode
+                QPixmap player2; //changing signs of player status
+                player2.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_status.png"); //CHANGE IMAGE DIRECTORY HERE!
+
+                ui->player_status->setPixmap(player2);
+                ui->player_status->show();
+            }
+
+
+
+        }
+        else{ //when player 2 turn
+            button->setIcon(icon2);
+            button_slots[row_idx][column_idx]=2; //send value of icon
+
+            if(ai_mode==false){ //change player status for non ai mode
+                QPixmap player1; //changing signs of player status
+                player1.load("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_status.png"); //CHANGE IMAGE DIRECTORY HERE!
+
+                ui->player_status->setPixmap(player1);
+                ui->player_status->show();
+            }
+
+
+
+        }
+
+
+        update_board(row_idx, column_idx); //put down or reverse values depending on button just clicked
+        update_board_score(); //update scores
+        turn+=1; //changing turns
+
+
+
+        if(ai_mode) //ai's turn
+            ai_turn();
+
+    }
+
+
+    if(limit_mode==true){ //for when limit mode is played
+        if(starting_player==1){ //if starting player is 1
+            if(turn==10) //end after 10 turns
+                end_the_game();
+
+        }
+
+        else{ //if starting player is 2
+            if(turn==11)
+                end_the_game();
+        }
+    }
+
+
+}
+
+
+//==================================================================================================
+//AI MODE
+//==================================================================================================
+
+
+
+
+void MainWindow::ai_turn() //action when ai is playing
 {
     int trial_row=0;
     int trial_column=0;
@@ -626,20 +629,27 @@ void MainWindow::ai_turn()
     int final_row=0;
     int final_column=0;
     int final_value=0;
+    int value=3;
 
+    if(hard_mode)
+        value=10;
+
+
+
+    //CHANGE IMAGE DIRECTORY HERE!
     QPixmap player1_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player1_icon"); //create button icons
     QPixmap player2_icon("C:/HGU/Grade4_Sem2/Programming2/reversiiii/tosize_2/player2_icon");
     QIcon icon1(player1_icon);
     QIcon icon2(player2_icon);
 
 
-    for(int i=0; i<5; ++i) //checks 5 different spots to find optimal spot
+    for(int i=0; i<value; ++i) //checks 5 different spots to find optimal spot
     {
-        while(true)
+        while(true) //continue to find place where piece can be placed
         {
             trial_row=rand()%8;
             trial_column=rand()%8;
-            if(check_in_slot(trial_row, trial_column)==false && check_adjacency_ai(trial_row, trial_column)==false)
+            if(check_in_slot(trial_row, trial_column)==false && check_adjacency(trial_row, trial_column)==false)
             { //can put down piece
                 break;
             }
@@ -647,7 +657,7 @@ void MainWindow::ai_turn()
 
         trial_value=check_value(trial_row, trial_column); //checks what if value
 
-        if(trial_value>=final_value){
+        if(trial_value>=final_value){ //finds best value of the 5 tries
             final_value=trial_value;
             final_row=trial_row;
             final_column=trial_column;
@@ -972,5 +982,15 @@ void MainWindow::on_ai_versus_clicked()
     ui->stackedWidget->setCurrentIndex(2);
     ui->mode_name->setText("AI Mode");
     ai_mode=true;
+    hard_mode=false;
+}
+
+
+void MainWindow::on_hard_mode_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    ui->mode_name->setText("AI Mode");
+    ai_mode=true;
+    hard_mode=true;
 }
 

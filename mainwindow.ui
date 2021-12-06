@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="start_page">
      <widget class="QLabel" name="start_page_label">
@@ -1913,6 +1913,19 @@
         <x>230</x>
         <y>460</y>
         <width>90</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="hard_mode">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>500</y>
+        <width>86</width>
         <height>24</height>
        </rect>
       </property>
