@@ -70,14 +70,14 @@ private:
                            {0, 0, 0, 0, 0, 0, 0, 0},
                            {0, 0, 0, 0, 0, 0, 0, 0}}; //initialize to zero
 
-    int check_value(int trial_row, int trial_column); //check value for ai mode
+    int check_value(int trial_row, int trial_column); //check future value for ai
     int computer_player=1;
-    void ai_turn();
-    bool check_adjacency_ai(int row_idx, int column_idx);
+    void ai_turn(); //when ai's turn
 
-    bool limit_mode=false; //when limit mode is on
     bool ai_mode=false; //when playing against computer
     bool hard_mode=false;
+    bool limit_mode=false; //when limit mode is on
+
     int turn=0; //creating turns
     int starting_player=0;
     int player1_score=2; //scores declared as global so that game can end anytime and scores can be remembered

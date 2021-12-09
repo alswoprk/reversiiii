@@ -110,6 +110,14 @@ void MainWindow::end_the_game() //shows final results of the game
         ui->final_winner->setText(QString::number(winner));
     }
 
+    ai_mode=false; //set all values to initial value when ending game
+    limit_mode=false;
+    hard_mode=false;
+    turn=0;
+    starting_player=0;
+
+
+
 }
 
 void MainWindow::update_board_score() //updating score based on the button_slots array
@@ -382,62 +390,6 @@ bool MainWindow::check_in_slot(int row_idx, int column_idx){ //check whether in 
     else
         return false;
 }
-/*
-bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent places to see if can be placed
-
-    if(button_slots[row_idx-1][column_idx]==1||button_slots[row_idx-1][column_idx]==2){//vertical and horizontal check
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
-            return false;
-        else
-            return true;
-    }
-    else if(button_slots[row_idx+1][column_idx]==1||button_slots[row_idx+1][column_idx]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
-            return false;
-        else
-            return true;
-    }
-    else if(button_slots[row_idx][column_idx+1]==1||button_slots[row_idx][column_idx+1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
-            return false;
-        else
-            return true;
-    }
-    else if(button_slots[row_idx][column_idx-1]==1||button_slots[row_idx][column_idx-1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
-            return false;
-        else
-            return true;
-    }
-    else if(button_slots[row_idx-1][column_idx-1]==1||button_slots[row_idx-1][column_idx-1]==2){ //diagonal check
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
-            return false;
-        else
-            return true;
-    }
-
-    else if(button_slots[row_idx-1][column_idx+1]==1||button_slots[row_idx-1][column_idx+1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
-            return false;
-        else
-            return true;
-    }
-    else if(button_slots[row_idx+1][column_idx-1]==1||button_slots[row_idx+1][column_idx-1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
-            return false;
-        else
-            return true;
-    }
-    else if(button_slots[row_idx+1][column_idx+1]==1||button_slots[row_idx+1][column_idx+1]==2){
-        if(row_idx>=0 && row_idx<8 && column_idx>=0 && column_idx<8)
-            return false;
-        else
-            return true;
-    }
-    else
-        return true; //true means cannot place there
-
-}*/
 
 
 bool MainWindow::check_adjacency(int row_idx, int column_idx){ //check adjacent places and see if piece can be put down
@@ -591,6 +543,7 @@ void MainWindow::button_slots_pressed(){ //event when board is clicked
 
 
         if(ai_mode) //ai's turn
+            //QThread::sleep(1); //put pause before ending
             ai_turn();
 
     }
@@ -622,6 +575,9 @@ void MainWindow::button_slots_pressed(){ //event when board is clicked
 
 void MainWindow::ai_turn() //action when ai is playing
 {
+
+
+
     int trial_row=0;
     int trial_column=0;
     int trial_value=0;
@@ -631,7 +587,7 @@ void MainWindow::ai_turn() //action when ai is playing
     int final_value=0;
     int value=3;
 
-    if(hard_mode)
+    if(hard_mode) //checks more value to find optimal spot
         value=10;
 
 
@@ -684,9 +640,9 @@ void MainWindow::ai_turn() //action when ai is playing
 }
 
 
-int MainWindow::check_value(int trial_row, int trial_column) //predicts value
+int MainWindow::check_value(int trial_row, int trial_column) //predicts value for ai
 {
-    //ui->warning_1->setText("here!");
+
     int current_player=computer_player;
     int opponent_player=0;
     int total_score=0;
@@ -782,6 +738,7 @@ int MainWindow::check_value(int trial_row, int trial_column) //predicts value
         }
         }
     }
+
     //=================================================================================
     //FOR DIAGONAL PATHS
     //=================================================================================
@@ -926,7 +883,6 @@ void MainWindow::on_choose_player1_clicked() //when player 1 is chosen to go fir
 
 }
 
-
 void MainWindow::on_choose_player2_clicked() //when player 2 is chosen to go first
 {
     starting_player=2;
@@ -951,6 +907,10 @@ void MainWindow::on_ending_button_clicked() //end the game no matter what when e
 
 void MainWindow::on_normal_mode_clicked() //start normal mode
 {
+    ai_mode=false;
+    hard_mode=false;
+    limit_mode=false;
+
     ui->stackedWidget->setCurrentIndex(2);
     ui->mode_name->setText("Normal Mode");
 }
@@ -958,9 +918,13 @@ void MainWindow::on_normal_mode_clicked() //start normal mode
 
 void MainWindow::on_limited_mode_clicked() //start limited turn mode
 {
+    ai_mode=false;
+    hard_mode=false;
+    limit_mode=true;
+
     ui->stackedWidget->setCurrentIndex(2);
     ui->mode_name->setText("10 Moves");
-    limit_mode=true;
+
 }
 
 
@@ -971,26 +935,32 @@ void MainWindow::on_retry_button_clicked() //redo the game
 }
 
 
-void MainWindow::on_quit_button_clicked()
+void MainWindow::on_quit_button_clicked() //terminate application
 {
     QApplication::quit();
 }
 
 
-void MainWindow::on_ai_versus_clicked()
+void MainWindow::on_ai_versus_clicked() //easy ai mode
 {
-    ui->stackedWidget->setCurrentIndex(2);
-    ui->mode_name->setText("AI Mode");
+    limit_mode=false;
     ai_mode=true;
     hard_mode=false;
+
+    ui->stackedWidget->setCurrentIndex(2);
+    ui->mode_name->setText("Easy Mode");
+
 }
 
 
-void MainWindow::on_hard_mode_clicked()
+void MainWindow::on_hard_mode_clicked() //hard ai mode
 {
-    ui->stackedWidget->setCurrentIndex(2);
-    ui->mode_name->setText("AI Mode");
+    limit_mode=false;
     ai_mode=true;
     hard_mode=true;
+
+    ui->stackedWidget->setCurrentIndex(2);
+    ui->mode_name->setText("Hard Mode");
+
 }
 
