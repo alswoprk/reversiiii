@@ -885,6 +885,9 @@ void MainWindow::on_choose_player1_clicked() //when player 1 is chosen to go fir
 
 void MainWindow::on_choose_player2_clicked() //when player 2 is chosen to go first
 {
+    if(ai_mode){
+        computer_player=1;
+    }
     starting_player=2;
     ui->stackedWidget->setCurrentIndex(3);
     QPixmap player2;
@@ -928,19 +931,6 @@ void MainWindow::on_limited_mode_clicked() //start limited turn mode
 }
 
 
-void MainWindow::on_retry_button_clicked() //redo the game
-{
-    ui->stackedWidget->setCurrentIndex(0);
-
-}
-
-
-void MainWindow::on_quit_button_clicked() //terminate application
-{
-    QApplication::quit();
-}
-
-
 void MainWindow::on_ai_versus_clicked() //easy ai mode
 {
     limit_mode=false;
@@ -963,4 +953,19 @@ void MainWindow::on_hard_mode_clicked() //hard ai mode
     ui->mode_name->setText("Hard Mode");
 
 }
+
+
+void MainWindow::on_retry_button_clicked() //redo the game
+{
+    ui->stackedWidget->setCurrentIndex(0);
+
+}
+
+
+void MainWindow::on_quit_button_clicked() //terminate application
+{
+    QApplication::quit();
+}
+
+
 
